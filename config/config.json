@@ -1,0 +1,8 @@
+{
+    "database": {
+        "host": "dog-meetup.c2zrvfpx8fha.us-east-2.rds.amazonaws.com",
+        "user": "SirBaconn",
+        "password": "dogsarebetter00",
+        "database": "dog_meetup"
+    }
+}
