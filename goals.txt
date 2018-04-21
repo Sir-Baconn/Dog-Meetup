@@ -1,0 +1,51 @@
+Pages
+-----
+
+1) Welcome - Introduction of what the site is
+
+2) User Creation/Sign up
+    - Form with input fields for name (text)
+        - email (text)
+        - password (text) 
+        - location (text)
+        - phone number (text) 
+        - number of dogs (text)
+
+3) Profile
+    - Displays details of a user (typical profile page of any site)
+
+4) Add Dog
+    - Form with input fields include:
+        - dog name (text)
+        - dog breed (dropdown - I will populate later)
+        - one word description of dog (text)
+        - age (dropdown of numbers 0 through 20)
+        - size (dropdown of x-small, small, medium, large, x-large)
+        - activity level (dropdown of 'couch potato', 'regular exercise', 'calm', 'needs lots of activity', 'energetic')
+        - barking level (dropdown of 'infrequent', 'medium' 'frequent')
+        - friendly level (dropdown of 'reserved', 'middle', 'very friendly')
+
+5) My Dogs
+    - Displays details of user's dogs (not sure how to make this look)
+
+6) My Meetups
+    - Displays currently scheduled meetups (not sure how to make this look)
+
+7) Find Meetup
+    - Form for searching for nearby meetups. Fields include:
+        - date (calendar dropdown?)
+        - time (dropdown of 1:00AM, 2:00AM, 3:00AM, etc up to midnight)
+        - location (dropdown but make this just a text field - I will populate later)
+        - length (dropdown of 30 minutes, 1 hour, 1.5 hours, 2 hours, any amount)
+        - dog (dropdown - I will populate later)
+
+
+DB Tables
+---------
+
+User info (pk=id, name, email, location, phone number, number of dogs)
+Dog Info (pk=id, fk=userId, dog name, dog breed, one word description of dog, age)
+Meetup Preferences (stuff about when the dog/owner prefers to meet up) (pk=id, fk=userId, weekday, time)
+Meetup (details about a specific meetup) (fk=userId, fk=userId, datetime, location, length)
+Parks (list of a bunch of parks) ()
+User Parks (what parks are near the user/they like to go to to take their dog) ()
