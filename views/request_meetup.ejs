@@ -22,19 +22,36 @@
 </header>
 <body>
 <h1>
-    Find a meetup
+    Request a meetup
 </h1>
 <p>
-    <form action="/action_page.php">
-    Date:
-        <input type="date" name="date">
-        <input type="submit" value="Send">
-    </form><br>
-    Time:<br>
-    Location:<br>
-    Length:<br>
-    Dog:<br>
-    <button type="button" onclick="window.location.href = '   ';">Submit</button>
+    <form method="POST" action="">
+        Date:
+            <input type="date" name="date">
+        <br>
+        Time:
+            <input type="time" id="time" name="time">
+        <br>
+        Location:
+            <input type="text" id="location" name="location">
+        <br>
+        Length:
+            <select id="length" name="length">
+                <option value="30 mins">30 minutes</option>
+                <option value="1 hr">1 hour</option>
+                <option value="1 hr 30 mins">1 hr 30 min</option>
+                <option value="2 hours">2 hours</option>
+            </select>
+        <br>
+        Dog:
+            <select id="dog" name="dog">
+                <% for(var i = 0; i < dogs.length; i++){ %>
+                    <option value="<%= dogs[i].iddogs %>"><%= dogs[i].name %></option>
+                <% } %>
+            </select>
+        <br>
+        <input type="submit">
+    </form>
 </p>
 
 </body>

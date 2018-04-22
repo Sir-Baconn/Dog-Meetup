@@ -3,20 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dog-Meetup</title>
+    <title>Find a Meetup</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/find_meetups.css" />
     <script src="main.js"></script>
     <style>
-        body {
+        body{
             background-color: lightblue;
-        }
-        a {
-            text-decoration: none;
         }
     </style>
 </head>
@@ -24,11 +21,28 @@
     <% include templates/header.ejs%>
 </header>
 <body>
-
-    <h1 style= color:blue><center><font size = "50"> DOG-MEETUP </font></center></h1>    
-    <p style = color:blue><center><font size = "5"> hi. </font></center></p>
-    <p><center><img src = https://i.redd.it/j1doocefbbg01.jpg width="300" height="300"></center></p>
-    <p><center><button type="button"><a href="/signUp">Sign Up</a></button></center> </p>
+<h1>
+    Find a meetup
+</h1>
+<div class="meetupList">
+    <ul class="list-group">
+        <% for(var i = 0; i < meetups.length; i++){ %>
+            <li class="list-group-item">
+                <div class="leftSide">
+                    <img src="http://www.dogbreedslist.info/uploads/allimg/dog-pictures/Rottweiler-1.jpg" width="200px" height="200px">
+                    <p style="display: inline-block;">yes</p>
+                    <p>yes</p>
+                    <p>yes</p>
+                </div>
+                <div class="rightSide">
+                    <span class="time"><%= meetups[i].time %></span><hr><br>
+                    <span><%= meetups[i].location %></span><br><br>
+                    <span class="badge badge-pill location"><%= meetups[i].length %></span>
+                </div>
+            </li>
+        <% } %>
+    </ul>
+</div>
 
 </body>
 </html>

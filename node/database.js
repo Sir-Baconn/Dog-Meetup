@@ -79,6 +79,14 @@ function insertDog(dog, callback){
     });
 }
 
+function insertRequestedMeetup(meetup, callback){
+    var query = 'INSERT INTO dog_meetup.requested_meetups SET ?';
+    db.query(query, meetup, function(err, result){
+        if(err) throw err;
+        return callback(result);
+    })
+}
+
 function getBreeds(callback){
     var query = 'SELECT * FROM dog_meetup.breeds';
     db.query(query, function(err, result){
@@ -100,15 +108,23 @@ function getUserInfo(email, callback){
     db.query(query, email, function(err, result){
         if(err) throw err;
         return callback(result);
-    })
+    });
 }
 
 function getDogs(email, callback){
-    var query = 'SELECT name, breed, description, age, size, activity_level, barking_level, friendly_level FROM dog_meetup.dogs WHERE userid = ?';
+    var query = 'SELECT iddogs, name, breed, description, age, size, activity_level, barking_level, friendly_level FROM dog_meetup.dogs WHERE userid = ?';
     db.query(query, email, function(err, result){
         if(err) throw err;
         return callback(result);
-    })
+    });
+}
+
+function getRequestedMeetups(callback){
+    var query = 'SELECT * FROM dog_meetup.requested_meetups';
+    db.query(query, function(err, result){
+        if(err) throw err;
+        return callback(result);
+    });
 }
 
 module.exports = {
@@ -117,12 +133,14 @@ module.exports = {
     insertBreeds: insertBreeds,
     insertUser: insertUser,
     insertDog: insertDog,
+    insertRequestedMeetup: insertRequestedMeetup,
 
     getUser: getUser,
     getBreeds: getBreeds,
     getUserId: getUserId,
     getUserInfo: getUserInfo,
     getDogs: getDogs,
+    getRequestedMeetups: getRequestedMeetups,
 
     closeConnection: closeConnection
 }
