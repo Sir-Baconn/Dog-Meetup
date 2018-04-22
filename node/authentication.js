@@ -12,10 +12,9 @@ function storeUser(email, password, userData){
     
 }
 
-function userExists(email, password){
-    database.startConnection();
+function userExists(email, password, callback){
     database.getUser(email, password, function(res){
-
+        return callback(res);
     });
 }
 

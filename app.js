@@ -31,7 +31,6 @@ app.get('/signup', function(req, res, next){
 });
 
 app.post('/signup', function(req, res, next){
-    console.log(JSON.stringify(req.body));
     req.session.email = req.body.email;
     var userData = {
         name: req.body.name,
@@ -44,8 +43,31 @@ app.post('/signup', function(req, res, next){
     res.redirect('signup_confirmation');
 });
 
+app.get('/login', function(req, res, next){
+    res.render('login');
+});
+
+app.post('/login', function(req, res, next){
+    authenticator.userExists(req.body.email, req.body.password, function(result){
+        if(result){
+            if(!req.session.email){
+                req.session.email = req.body.email;
+            }
+            res.render('confirmation', {
+                text: 'Login was successful'
+            });
+        }else{
+            res.render('confirmation', {
+                text: 'Login failed please try again'
+            });
+        }
+    }); 
+});
+
 app.get('/signup_confirmation', function(req, res, next){
-    res.render('signup_confirmation'); 
+    res.render('confirmation', {
+        text: 'Thanks for signing up'
+    }); 
 });
 
 // GET add_dog
@@ -70,9 +92,22 @@ app.post('/add_dog', function(req, res, next){
         friendly_level: req.body.friendlyLevel,
         userid: req.session.email
     };
-    
+
     database.insertDog(dog, function(result){
-        res.send('thanks');
+        res.render('confirmation', {
+            text: 'Added dog successfully'
+        });
+    });
+});
+
+app.get('/profile', function(req, res, next){
+    database.getUserInfo(req.session.email, function(userInfo){
+        database.getDogs(req.session.email, function(dogs){
+            res.render('profile', {
+                userInfo: userInfo[0],
+                dogs: dogs
+            });
+        });
     });
 });
 

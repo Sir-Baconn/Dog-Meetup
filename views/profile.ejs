@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dog-Meetup</title>
+    <title>Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -12,24 +12,45 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
     <style>
-        body {
+        body{
             background-color: lightblue;
-        }
-        a {
-            text-decoration: none;
         }
     </style>
 </head>
 <header>
     <% include templates/header.ejs%>
 </header>
-<body>
+<body><center>  
+    <h1>
+        <%= userInfo.name %>'s Profile <br>
+        <button type="button" onclick="window.location.href = 'addDog';"> Add new dog </button>
+        <button type="button" onclick="window.location.href = 'findMeetup';"> Find meetup </button>
+    </h1>
+    <p>
+        Location: <%= userInfo.location %><br>
+        Phone: <%= userInfo.phone_number %><br>
+    </p>
 
-    <h1 style= color:blue><center><font size = "50"> DOG-MEETUP </font></center></h1>    
-    <p style = color:blue><center><font size = "5"> hi. </font></center></p>
-    <p><center><img src = https://i.redd.it/j1doocefbbg01.jpg width="300" height="300"></center></p>
-    <p><center>info here...................................................</center></p>
-    <p><center><button type="button"><a href="/signUp">Sign Up</a></button></center> </p>
+    <h1>
+       My Dogs <br>
+    </h1>
+    <% if(dogs.length < 1) { %>
+        <p>No dogs found!</p>
+    <% }else{ %>
+        <% for(var i = 0; i < dogs.length; i++){ %>
+            <p>
+                (Picture?) <br>
+                <b><%= dogs[i].name %> </b> <br>
+                Age: <%= dogs[i].age %> <br>
+                Breed: <%= dogs[i].breed %> <br>
+                Size: <%= dogs[i].size %> <br> 
+                Friendliness: <%= dogs[i].friendly_level %> <br>
+                Activity level: <%= dogs[i].activity_level %> <br>
+                Barking level: <%= dogs[i].barking_level %> 
 
+            </p>
+        <% } %>
+    <% } %>
+    </center>
 </body>
 </html>

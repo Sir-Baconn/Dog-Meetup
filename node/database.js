@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var options = require('./options');
+const bcrypt = require('bcryptjs');
 
 // Global variable - gives access to mysql db connection
 var db;
@@ -25,7 +26,6 @@ function insertBreeds(breeds, callback){
     var query = 'INSERT INTO dog_meetup.breeds (breed) VALUES ?'
     db.query(query, [breeds], function(error, results, fields) {
         if (error) throw error;
-        console.log(results);
     });
 }
 
@@ -50,12 +50,28 @@ function insertUser(email, password, userData, callback){
             }
             console.log(err);
         }
-        return result;
+        return callback(result);
+    });
+}
+
+function getUser(email, password, callback){
+    var query = 'SELECT password FROM dog_meetup.users WHERE email = ?';
+    db.query(query, email, function(err, result){
+        if(err) throw err;
+        if(typeof result[0] === "undefined"){
+            return callback(false);
+        }
+        bcrypt.compare(password, result[0].password, function(err, doesMatch){
+            if (doesMatch){
+                return callback(true);
+            }else{
+                return callback(false);
+            }
+        });
     });
 }
 
 function insertDog(dog, callback){
-    console.log(dog);
     var query = 'INSERT INTO dog_meetup.dogs SET ?';
     db.query(query, dog, function(err, result){
         if(err) throw err;
@@ -74,10 +90,25 @@ function getBreeds(callback){
 function getUserId(email, callback){
     var query = 'SELECT iduser FROM dog_meetup.users WHERE email = ?';
     var q = db.query(query, email, function(err, result){
-        console.log(q.sql);
         if(err) throw err;
-        return result;
+        return callback(result);
     });
+}
+
+function getUserInfo(email, callback){
+    var query = 'SELECT name, location, phone_number, number_of_dogs FROM dog_meetup.users WHERE email = ?';
+    db.query(query, email, function(err, result){
+        if(err) throw err;
+        return callback(result);
+    })
+}
+
+function getDogs(email, callback){
+    var query = 'SELECT name, breed, description, age, size, activity_level, barking_level, friendly_level FROM dog_meetup.dogs WHERE userid = ?';
+    db.query(query, email, function(err, result){
+        if(err) throw err;
+        return callback(result);
+    })
 }
 
 module.exports = {
@@ -87,8 +118,11 @@ module.exports = {
     insertUser: insertUser,
     insertDog: insertDog,
 
+    getUser: getUser,
     getBreeds: getBreeds,
     getUserId: getUserId,
+    getUserInfo: getUserInfo,
+    getDogs: getDogs,
 
     closeConnection: closeConnection
 }
