@@ -1,9 +1,10 @@
-h1{
-    margin: 40px 15px;
+body{
+    background-color: lightblue;
 }
 
-.meetupList{
-    margin-top: 30px;
+.mainContent{
+    margin: 30px;
+    width: 100%;
 }
 
 hr{
@@ -11,12 +12,9 @@ hr{
     margin-top: 5px;
 }
 
-.list-group{
-    margin: 0 15px;
-}
-
 .list-group-item{
     margin: 0 0 10px 0;
+    background-color: #A7D3A6;
 }
 
 .list-group-item>.badge {
@@ -28,6 +26,33 @@ hr{
     width: 70%;
 }
 
+.leftSide img{
+    float: left;
+    margin-right: 10px;
+}
+
 .rightSide{
     display: inline-block;
+    position: absolute;
+}
+
+.fa-map,
+.fa-clock,
+.fa-calendar-alt{
+    margin-right: 10px;
+}
+
+.joinBtn{
+    background-color: rgb(58, 189, 56);
+    outline: none;
+    box-shadow: none;
+    border: none; 
+}
+
+.joinBtn:focus,.joinBtn:active:focus,.joinBtn.active:focus,
+.joinBtn.focus,.joinBtn:active.focus,.joinBtn.active.focus,
+.joinBtn:hover{
+    background-color: rgb(30, 167, 28);
+    outline: none;
+    box-shadow: none;
 }

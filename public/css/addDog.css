@@ -1,0 +1,12 @@
+body{
+    background-color: lightblue;
+}
+
+.mainContent{
+    margin: 30px;
+    width: 100%;
+}
+
+form{
+    width: 25%;
+}

@@ -149,12 +149,39 @@ app.post('/request_meetup', function(req, res, next){
 });
 
 app.get('/find_meetups', function(req, res, next){
-    
-    database.getRequestedMeetups(function(meetups){
-        res.render('find_meetups', {
-            meetups: meetups
-        });
-    });
+
+    if(!req.session.email){
+        res.redirect('login');
+    }else{
+        if(req.query.idrequested_meetups){
+            database.getRequestedMeetupById(req.query.idrequested_meetups, function(requestedMeetup){
+                database.getDogs(req.session.email, function(dogs){
+                    var meetup = {
+                        userid_1: requestedMeetup[0].userid,
+                        userid_2: req.session.email,
+                        time: requestedMeetup[0].time,
+                        location: requestedMeetup[0].location,
+                        length: requestedMeetup[0].length,
+                        dogid_1: req.query.dogid,
+                        dogid_2: dogs[0].iddogs
+                    };
+                    database.insertMeetup(meetup, function(result){
+                        console.log(result);
+                        // Lastly remove the requestedmeetup from the requested meetup table
+
+                        // Send over the requestedmeetupid
+                        res.send(req.query.idrequested_meetups);
+                    });
+                });
+            });
+        }else{
+            database.getRequestedMeetups(req.session.email, function(meetups){
+                res.render('find_meetups', {
+                    meetups: meetups
+                });
+            });
+        }
+    }
 })
 
 app.get('/my_meetups', function(req, res, next){
