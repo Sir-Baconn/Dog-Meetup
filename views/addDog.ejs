@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>New dog profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<header>
+    <% include templates/header.ejs%>
+</header>
+<body>
+    <h1>
+        New dog profile
+    </h1>
+    <form method="POST" action="">
+        Dog's Name: 
+            <input type="text" name="name" id="name"><br>
+        Breed: 
+            <select id="breed" name="breed">
+                <% for(var i = 0; i < breeds.length-1; i++){ %>
+                    <option value="<%= breeds[i].breed %>"><%= breeds[i].breed %></option>
+                <% } %>
+            </select><br>
+        Describe dog in one word: 
+            <input type="text" name="description"><br>
+        Age: 
+            <select id="age" name="age">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+            </select><br>
+        Size: 
+            <select id="size" name="size">
+                <option value="x-small">x-small</option>
+                <option value="small">small</option>
+                <option value="medium">medium</option>
+                <option value="large">large</option>
+                <option value="x-large">x-large</option>
+            </select><br>
+        Activity Level: 
+            <select id="activityLevel" name="activityLevel">
+                <option value="couch potato">Couch potato</option>
+                <option value="regular Excercise">Regular Excercise</option>
+                <option value="calm">Calm</option>
+                <option value="need lots of activity">Need lots of activity</option>
+                <option value="energetic">Energetic</option>
+            </select><br>
+        Barking level: 
+            <select id="barkingLevel" name="barkingLevel">
+                <option value="infrequent">Infrequent</option>
+                <option value="medium">Medium</option>
+                <option value="frequent">Frequent</option>
+            </select><br>
+        Friendly level: 
+            <select id="friendlyLevel" name="friendlyLevel">
+                <option value="reserved">Reserved</option>
+                <option value="middle">Middle</option>
+                <option value="very friendly">Very friendly</option>
+            </select>
+            <input type="submit">
+    </form>    
+</body>
+</html>
