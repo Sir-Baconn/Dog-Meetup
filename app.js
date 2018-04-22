@@ -72,11 +72,15 @@ app.get('/signup_confirmation', function(req, res, next){
 
 // GET add_dog
 app.get('/add_dog', function(req, res, next){
-    database.getBreeds(function(breeds){
-        res.render('addDog', {
-            breeds: breeds
+    if(!req.session.email){
+        res.redirect('login');
+    }else{
+        database.getBreeds(function(breeds){
+            res.render('addDog', {
+                breeds: breeds
+            });
         });
-    });
+    }
 });
 
 // POST add_dog
@@ -101,14 +105,26 @@ app.post('/add_dog', function(req, res, next){
 });
 
 app.get('/profile', function(req, res, next){
-    database.getUserInfo(req.session.email, function(userInfo){
-        database.getDogs(req.session.email, function(dogs){
-            res.render('profile', {
-                userInfo: userInfo[0],
-                dogs: dogs
+    if(!req.session.email){
+        res.redirect('login');
+    }else{
+        database.getUserInfo(req.session.email, function(userInfo){
+            database.getDogs(req.session.email, function(dogs){
+                res.render('profile', {
+                    userInfo: userInfo[0],
+                    dogs: dogs
+                });
             });
         });
-    });
+    }
+});
+
+app.get('/find_meetup', function(req, res, next){
+    res.send('hi');
+});
+
+app.get('/my_meetups', function(req, res, next){
+    res.send('hello');
 });
 
 app.listen(process.env.PORT || 3000, '0.0.0.0', function() {
